@@ -1,0 +1,77 @@
+﻿@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = "Cart";
+    var @corname = @ViewData["CorporationName"];
+}
+@section Styles{
+   
+}
+@section Scripts{
+    <script src="~/cshop-app/controllers/cart/cart.js" asp-append-version="true"></script>
+    <script>
+        var cartObj = new cartController();
+        cartObj.initialize();
+    </script>
+}
+
+<!-- Main Container -->
+<section class="main-container col1-layout">
+    <div class="main container">
+        <div class="col-main">
+            <div class="cart">
+                <div class="page-content page-order">
+                    <div class="page-title">
+                        <h2>@Localizer["ShoppingCart"] </h2>
+                    </div>
+                    <div class="order-detail-content">
+                        <div class="table-responsive">
+                            <table class="table table-bordered cart_summary">
+                                <thead>
+                                    <tr>
+                                        <th class="cart_product">@Localizer["Product"] </th>
+                                        <th>@Localizer["Description"]</th>
+                                        <th>@Localizer["UnitPrice"]</th>
+                                        <th>@Localizer["Quantity"]</th>
+                                        <th>@Localizer["Total"]</th>
+                                        <th class="action"><i class="fa fa-trash-o"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-cart-content"></tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3"><strong>@Localizer["Total"]</strong></td>
+                                        <td colspan="3"><strong><span id="lblTotalAmount"></span> </strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <script id="template-cart" type="x-tmpl-mustache">
+                                <tr data-id="{{ProductId}}">
+                                    <td class="cart_product">
+                                        <a href="{{Url}}">
+                                            <img src="{{Image}}" alt="{{ProductName}}">
+                                        </a>
+                                    </td>
+                                    <td class="cart_description">
+                                        <p class="product-name"><a href="#">{{ProductName}}</a></p>
+                                        <small><a href="#">@Localizer["Color"]: {{{Colors}}}</a></small>
+                                        <small><a href="#">@Localizer["Size"]: {{{Sizes}}}</a></small>
+                                    </td>
+                                    <td class="price"><span>{{Price}}</span></td>
+                                    <td class="qty"><input class="form-control input-sm txtCartQuantity" data-id="{{ProductId}}" type="text" value="{{Quantity}}"></td>
+                                    <td class="price"><span>{{Amount}}</span></td>
+                                    <td class="action"><a href="#" data-id="{{ProductId}}" class="btn-CartDelete"><i class="icon-close"></i></a></td>
+                                </tr>
+                            </script>
+                        </div>
+                        <div class="cart_navigation">
+                            <a class="btnContinueShopping" ><i class="fa fa-arrow-left"> </i>&nbsp; @Localizer["ContinueShopping"]</a>
+                            <a id="btnClearAll" href="#"><i class="fa fa-remove"> </i>&nbsp; @Localizer["ClearCart"]</a>
+                            <a class="checkout-btn btnCartBeginOrder" onClick="location.href='/clientshop/cart/Order/@corname'" ><i class="fa fa-check"></i> @Localizer["BeginOrder"] </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

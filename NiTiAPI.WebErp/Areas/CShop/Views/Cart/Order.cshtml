@@ -1,0 +1,95 @@
+﻿@inject IViewLocalizer Localizer
+@model OrderViewModel
+@{
+    ViewData["Title"] = "Order";
+    var @corname = @ViewData["CorporationName"];
+}
+@section Scripts {
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    @*<recaptcha-script validation-message-element-id="recaptchaErrorMessage" />*@
+
+    <script src="~/cshop-app/controllers/cart/order.js" asp-append-version="true"></script>
+    <script>
+        var cartOrder = new orderController();
+        cartOrder.initialize();
+    </script>
+}
+<!-- Breadcrumbs -->
+<input type="hidden" id="hidOrderCorporationName" value="@corname" />
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul>
+                    <li class="home"> <a title="Go to Home Page" href="/">@Localizer["Home"]</a><span>&raquo;</span></li>
+                    <li><strong>@Localizer["Order"] </strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumbs End -->
+<!-- Main Container -->
+<section class="main-container col1-layout">
+    <div class="main container">
+        <div class="page-content">
+            <div class="account-login">
+                <div class="col-md-3 col-sm-2"></div>
+                <div class="col-md-6 col-sm-8">
+                    <div class="single-input p-bottom50 clearfix">
+                        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="check-title">
+                                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>@Localizer["CustomerName"]:</label>
+                                    <div class="input-text">
+                                        <input type="text" asp-for="CustomerName" name="customerName" id="CustomerName" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>@Localizer["CustomerEmail"]:</label>
+                                    <div class="input-text">
+                                        <input type="text" asp-for="CustomerEmail" name="email" id="CustomerEmail" class="form-control">
+                                    </div>
+                                </div>                               
+                                <div class="col-sm-6">
+                                    <label>@Localizer["PhoneNumber"]:</label>
+                                    <div class="input-text">
+                                        <input type="text" name="phoneNumber" asp-for="CustomerPhone" id="phoneNumber" class="form-control">
+                                    </div>
+                                </div>                                
+                                <div class="col-sm-6">
+                                    <label>@Localizer["Address"]:</label>
+                                    <div class="input-text">
+                                        <input type="text" name="address" asp-for="CustomerAddress" id="address" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <recaptcha />
+                                        <span class="text-danger" id="recaptchaErrorMessage"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <br/>
+                                    <div class="submit-text">
+                                        <button type="submit" class="button" id="bntBeginOrder"><i class="fa fa-user"></i>&nbsp; <span>@Localizer["BeginOrder"]</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Main Container End -->

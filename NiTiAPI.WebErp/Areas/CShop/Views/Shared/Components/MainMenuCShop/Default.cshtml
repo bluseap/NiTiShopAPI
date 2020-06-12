@@ -1,0 +1,54 @@
+﻿@inject IViewLocalizer Localizer
+@model Task<List<ProductViewModel>>
+
+@{
+    var hrefs = "/CShop/Home/index/" + @ViewData["CorporationName"];
+    var categories = Model.Result;
+    var @corname = @ViewData["CorporationName"];
+}
+
+<div class="mtmegamenu">
+    <ul class="hidden-xs">
+        <li class="mt-root demo_custom_link_cms">
+            <div class="mt-root-item">
+                <a href=@hrefs>
+                    <div class="title title_font"><span class="title-text">@Localizer["Home"]</span></div>
+                </a>
+            </div>
+        </li>
+        <li class="mt-root">
+            <div class="mt-root-item">
+                <a href="#">
+                    <div class="title title_font">
+                        @*<span class="title-text">@Localizer["Productss"]</span>*@
+                        <span class="title-text">Sản phẩm</span>
+                    </div>
+                </a>
+            </div>
+            <ul class="menu-items col-xs-12">
+                @foreach (var item in categories.Where(c => c.ParentId == 0))
+                {
+                    <li class="menu-item depth-1 menucol-1-3 ">
+                        <div class="title title_font"> <a href="/CShop/product/Search/@corname?catelogyId=0">@item.Name</a></div>
+                        <ul class="submenu">
+                            @foreach (var subItem in categories.Where(x => x.ParentId == item.Id))
+                            {
+                                <li class="menu-item">
+                                    <div class="title"> <a href="/CShop/product/Details/@corname?productId=@subItem.ProductId">@subItem.Name</a></div>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </li>      
+        <li class="mt-root">
+            <div class="mt-root-item">
+                <a href="/cshop/contact/index/@corname">
+                    <div class="title title_font"><span class="title-text">@Localizer["Contact"]</span></div>
+                </a>
+            </div>
+        </li>      
+        <li><a href="https://nitiapp.com"></a></li>
+    </ul>
+</div>

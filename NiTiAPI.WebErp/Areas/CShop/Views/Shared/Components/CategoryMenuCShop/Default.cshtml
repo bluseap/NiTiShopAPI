@@ -1,0 +1,45 @@
+﻿@inject IViewLocalizer Localizer
+@model Task<List<ProductViewModel>>
+
+@{
+    //var categories = Model.Result;
+    var @corname = @ViewData["CorporationName"];
+}
+
+<div class="navleft-container">
+    <div class="mega-menu-title">
+        <h3><span>All Categories</span></h3>
+    </div>
+
+    <!-- Shop by category -->
+    <div class="mega-menu-category" >
+        <ul class="nav">
+            @*@foreach (var item in categories.Where(x => x.ParentId == 0))*@
+            @foreach (var item in Model.Result.Where(x => x.ParentId == 0))
+            {
+                @*@if (categories.Any(x => Convert.ToInt64(x.ParentId) == item.Id))*@
+                @if (Model.Result.Any(x => Convert.ToInt64(x.ParentId) == item.Id))
+                {
+                    <li>
+                        <a href="/CShop/product/Search/@corname?catelogyId=0">@item.Name</a>
+                        <div class="wrap-popup column1">
+                            <div class="popup">
+                                <ul class="nav">
+                                    @*@foreach (var subItem in categories.Where(x => x.ParentId == item.Id))*@
+                                    @foreach (var subItem in Model.Result.Where(x => x.ParentId == item.Id))
+                                    {
+                                        <li><a href="/CShop/product/Details/@corname?productId=@subItem.ProductId"><span>@subItem.Name</span></a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    <li class="nosub"><a href="/CShop/product/Search/@corname?catelogyId=0">@item.Name</a></li>
+                }
+            }
+        </ul>
+    </div>
+</div>

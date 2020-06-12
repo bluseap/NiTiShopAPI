@@ -1,0 +1,120 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@inject IViewLocalizer Localizer
+@section Styles{
+    <link href="~/vendor/jquery-easyui/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link href="~/vendor/jquery-easyui/themes/icon.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/vendor/jquery-easyui/jquery.easyui.min.js"></script>    
+
+    <script src="~/admin-app/controllers/post/addedit-post.js" asp-append-version="true"></script>
+    <script src="~/admin-app/controllers/post/index.js" asp-append-version="true"></script>
+    <script>
+        var post = new postController();
+        post.initialize();
+    </script>
+}
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>@Localizer["Post"]<small></small></h3>
+    </div>
+    <div class="title_right">
+        <div class="col-md-2 col-sm-5 col-xs-12 form-group pull-right">
+            <button id="btnCreate" class="btn btn-round btn-success">@Localizer["Create"]</button>
+        </div>
+    </div>
+</div>
+<div class="page-title">
+    <div class="title_left">
+        <h3>  <small>@Localizer["ListPost"]</small></h3>
+    </div>
+</div>
+<div class="page-title">
+    <div class="title_left">
+        <h3>  <small></small></h3>
+    </div>
+    <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right">
+            <div class="input-group">
+                <input type="text" id="txtKeyword" class="form-control">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" id="btnSearch" type="button">@Localizer["Search"]</button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12 form-group pull-right">
+            <select class="form-control" id="ddlCategorySearch"></select>
+        </div>
+        <div class="col-md-3 col-sm-2 col-xs-12 form-group pull-right top_search">
+            <div class="input-group">
+                <select id="ddlCorporation" class="form-control"></select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>@Localizer["Title"]</th>
+                            <th>@Localizer["CategoryNewsName"]</th>
+                            <th>@Localizer["Corporation"]</th>
+                            <th>@Localizer["Image"]</th>
+                            <th>@Localizer["Status"]</th>
+                            <th width="20%">#</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl-contentPost"></tbody>
+                </table>
+                <!--Pagination-->
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="dataTables_info" id="datatable-checkbox_info" role="status" aria-live="polite">
+                            <select id="ddl-show-pagePost">
+                                <option value="10" selected="selected">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                            </select>
+                            <span class="item-per-page">
+                                @Localizer["RowPage"]
+                            </span>
+                            @Localizer["Toltal"] <strong id="lblTotalRecords"></strong>
+                        </div>
+                    </div><div class="col-sm-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="datatable-checkbox_paginate">
+                            <ul id="paginationULPost"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script id="table-templatePost" type="x-tmpl-mustache">
+    <tr>
+        <td>{{Title}}</td>
+        <td>{{CategoryNewsName}}</td>
+        <td>{{CorporationName}}</td>
+        <td>{{{Image}}}</td>
+        <td>{{{Status}}}</td>
+        <th scope="row">
+            <a class="btn  btn-sm btn-edit" data-id="{{Id}}" data-toggle="tooltip" data-placement="top" title=@Localizer["UpdateProduct"]><i class="fa fa-pencil"></i></a>
+            <a class="btn  btn-sm btn-delete" data-id="{{Id}}" data-toggle="tooltip" data-placement="top" title=@Localizer["DeleteProduct"]><i class="fa fa-trash"></i></a>
+            @*<a href="#" data-id="{{Id}}" class="btn btn-xs btn-images" data-toggle="tooltip" data-placement="top" title=@Localizer["ImageProductManage"]><i class="fa fa-image"></i></a>
+                <a href="#" data-id="{{Id}}" class="btn btn-xs btn-quantity" data-toggle="tooltip" data-placement="top" title=@Localizer["QuantityProductManage"]><i class="fa fa-hourglass-start"></i></a>
+                <a href="#" data-id="{{Id}}" class="btn btn-xs btn-whole-price" data-toggle="tooltip" data-placement="top" title=@Localizer["PriceProductManage"]><i class="fa fa-money"></i></a>*@
+        </th>
+    </tr>
+</script>
+
+<Partial name="_AddEditModal.cshtml" />

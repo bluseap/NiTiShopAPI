@@ -1,0 +1,81 @@
+﻿@inject IViewLocalizer Localizer
+<div id="modal-add-editListOrder" class="bootbox modal fade modal-darkorange in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">@Localizer["ListOrderDetails"] </h4>
+            </div>
+            <div class="modal-body">
+                <div id="horizontal-form">
+                    <input type="hidden" id="hidInsertListOrderQuantities" value="" />
+
+                    <form class="form-horizontal" role="form" id="frmMaintainanceListOrderDetails">
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label for="lbListOrderCustomerName">@Localizer["CustomerName"] </label>
+                                <input type="text" id="txtListOrderCustomerName" class="form-control">
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-sm-3 pull pull-right">
+                                <button class="btn btn-success bntExcelOrder" type="button">
+                                    @Localizer["ExportExcelOrder"]
+                                </button>
+                            </div>
+                        </div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <td>@Localizer["ProductName"]</td>
+                                    <td>@Localizer["Color"]</td>
+                                    <td>@Localizer["Size"]</td>
+                                    <td>@Localizer["Quantity"]</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody id="table-quantity-orderDetails"></tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                        <button class="btn btn-xs btn-warning" type="button" id="btn-add-quantityListOrder">@Localizer["Add"]</button>
+                                        @*<label class="control-label "><a style="color:red"> @Localizer["BeforeAdd"] </a></label>*@
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        @*<div class="form-group">
+            <label class="col-sm-2 control-label ">@Localizer["ChosseSize"] <a style="color:red"> (*)</a> </label>
+            <div class="col-sm-3">
+                <select id="ddlAttributeSize" class="form-control"></select>
+            </div>
+        </div>*@
+                    </form>
+                    <script type="x-tmpl-mustache" id="template-table-orderDetails">
+                        <tr data-id="{{Id}}">
+                            <td>{{ProductName}}</td>
+                            <td>{{{Colors}}}</td>
+                            <td>{{{Sizes}}}</td>
+                            <td><input type="number" class="txtQuantity form-control" value="{{Quantity}}" /></td>
+                            <td>
+                                <button class="btn btn-xs btn-danger btn-delete-quantityListOrder" type="button">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                                <input type="hidden" class="hiddenProductId form-control" value={{ProductId}} />
+                            </td>                            
+                        </tr>
+                    </script>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" id="btnSaveListOrder" class="btn btn-success">@Localizer["StartConfirmation"]</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-danger">@Localizer["Cance"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="_AddProductToOrder" />

@@ -1,0 +1,115 @@
+﻿@inject IViewLocalizer Localizer
+<div id="modal-add-edit" class="bootbox modal fade modal-darkorange in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">@Localizer["AddEditPost"] </h4>
+            </div>
+            <div class="modal-body">
+                <div id="horizontal-form">
+                    <input type="hidden" id="hidPostId" value="" />
+                    <input type="hidden" id="hidInsertPost" value="" />
+                    <input type="hidden" id="hidImagePost" value="" />
+
+                    <form class="form-horizontal" role="form" id="frmMaintainanceAddEdit">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label ">@Localizer["CorporationName"] <a style="color:red"> (*)</a> </label>
+                            <div class="col-sm-10">
+                                <select id="ddlAddEditCorporation" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right">@Localizer["CategoryNewsName"] <a style="color:red"> (*)</a></label>
+                            <div class="col-sm-10">
+                                <select id="ddlAddEditCategoryNews" class="form-control" name="ddlAddEditCategoryNews" style="width:200px"> </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lbAddEditTitle" class="col-sm-2 control-label no-padding-right">@Localizer["Title"] <a style="color:red"> (*)</a></label>
+                            <div class="col-sm-10">
+                                <input type="text" name="txtAddEditTitle" class="form-control" id="txtAddEditTitle">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lbAddEditDescription" class="col-sm-2 control-label no-padding-right">@Localizer["Description"] <a style="color:red"> (*)</a></label>
+                            <div class="col-sm-10">
+                                <textarea rows="4" name="txtAddEditDescription" class="form-control" id="txtAddEditDescription"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lbAddEditImage" class="col-sm-2 control-label no-padding-right">@Localizer["Image"] <a style="color:red"> (*)</a></label>
+                            <div class="col-xs-9 form-group has-feedback">
+                                <div id="imagelistImagePost" class="col-xs-9">
+                                </div>
+                                <div class="col-xs-9"><input type="file" id="fileInputImagePost" /></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lbAddEditListImage" class="col-sm-2 control-label no-padding-right">@Localizer["ListImage"] </label>
+                            <div class="col-xs-9 form-group has-feedback">
+                                <div id="imagelistImagePost2" class="col-xs-9">
+                                </div>
+                                <div class="col-xs-9">
+                                    <input type="file" id="fileInputImagePost2" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lbAddEditContent" class="col-sm-2 control-label no-padding-right">@Localizer["Content"] <a style="color:red"> (*)</a></label>
+                            <div class="col-sm-10">
+                                <textarea id="txtAddEditContent" rows="6" class="ckeditor" name="editor"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lbSeoTitle" class="col-sm-2 control-label no-padding-right">@Localizer["SeoTitle"]</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="txtSeoTitle" class="form-control" id="txtSeoTitle">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lbSeoAlias" class="col-sm-2 control-label no-padding-right">@Localizer["SeoAlias"]</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="txtSeoAlias" class="form-control" id="txtSeoAlias">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lbSeoKeyword" class="col-sm-2 control-label no-padding-right">@Localizer["SeoKeyword"]</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="txtSeoKeyword" class="form-control" id="txtSeoKeyword">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lbSeoDescription" class="col-sm-2 control-label no-padding-right">@Localizer["SeoDescription"]</label>
+                            <div class="col-sm-10">
+                                <textarea rows="3" name="txtSeoDescription" class="form-control" id="txtSeoDescription"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lbSeoTag" class="col-sm-2 control-label no-padding-right">@Localizer["SeoTag"]</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="txtSeoTag" class="form-control" id="txtSeoTag">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div>
+                                    <label>
+                                        <input type="checkbox" checked="checked" id="ckAddEditActive">
+                                        <span class="text">@Localizer["IsActive"]</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" id="btnAddEditSave" class="btn btn-success">@Localizer["Save"]</button>
+                                <button type="button" id="btnAddEditCancel" data-dismiss="modal" class="btn btn-danger">@Localizer["Cance"]</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

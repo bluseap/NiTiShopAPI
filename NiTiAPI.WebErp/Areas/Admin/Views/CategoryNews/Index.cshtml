@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+@inject IViewLocalizer Localizer
+@section Styles{
+    <link href="~/vendor/jquery-easyui/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link href="~/vendor/jquery-easyui/themes/icon.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/vendor/jquery-easyui/jquery.easyui.min.js"></script>
+    <script src="~/admin-app/controllers/catenews/addedit-catenews.js" asp-append-version="true"></script>
+    <script src="~/admin-app/controllers/catenews/index.js" asp-append-version="true"></script>
+    <script>
+        var categoryNews = new categoryNewsController();
+        categoryNews.initialize();
+    </script>
+}
+<div class="page-title">
+    <div class="title_left">
+        <h3>@Localizer["Catalog"] </h3>
+    </div>
+    <div class="title_right">
+        <div class="col-md-2 col-sm-2 col-xs-12 form-group pull-right">
+            <button class="btn btn-round btn-success" id="btnCreate" type="button"> @Localizer["Create"]</button>
+        </div>
+    </div>
+</div>
+<div class="page-title">
+    <div class="title_left">
+        <h3>  <small> @Localizer["ListCatalog"] </small></h3>
+    </div>
+    <div class="title_right">
+        <div class="col-md-3 col-sm-3 col-xs-12 form-group pull-right">
+            <button class="btn btn-primary" id="btnSearch" type="button">@Localizer["Search"]</button>
+        </div>
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right ">            
+             <select id="ddlCorporation" class="form-control"></select>           
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <ul id="treeCatalog"></ul>
+                <div id="contextMenu" class="easyui-menu" style="width:120px;">
+                    <div id="btnCatalogEdit" data-options="iconCls:'icon-edit'">@Localizer["Update"]</div>
+                    <div id="btnCatalogDelete" data-options="iconCls:'icon-remove'">@Localizer["Delete"]</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<partial name="_AddEditModal.cshtml" />

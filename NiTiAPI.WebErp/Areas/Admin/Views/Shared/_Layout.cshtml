@@ -1,0 +1,206 @@
+﻿
+@using NiTiAPI.WebErp.Extensions;
+@using Microsoft.AspNetCore.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();    
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="/admin-side/images/logoniti.ico" />
+
+    <title>NiTiCoApp </title>
+
+    <!-- Bootstrap -->
+    <link href="~/vendor/gentelella/vendors/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="~/vendor/gentelella/vendors/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <!-- NProgress -->
+    <link href="~/vendor/gentelella/vendors/nprogress/nprogress.css" rel="stylesheet" />
+    <!-- iCheck -->
+    <link href="~/vendor/gentelella/vendors/iCheck/skins/flat/green.css" rel="stylesheet" />
+    <!-- bootstrap-progressbar -->
+    <link href="~/vendor/gentelella/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.css" rel="stylesheet" />
+    <!-- JQVMap -->
+    <link href="~/vendor/gentelella/vendors/jqvmap/dist/jqvmap.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="~/vendor/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+
+    <link href="~/vendor/notifyjs/dist/styles/metro/notify-metro.css" rel="stylesheet" />
+
+    <!-- Loading.... -->
+    <link href="~/admin-side/loading/demo.css" rel="stylesheet" />
+    <link href="~/admin-side/loading/loading.css" rel="stylesheet" />
+
+
+    <!-- Custom Theme Style -->
+    <link href="~/admin-side/css/custom.css" rel="stylesheet" />
+
+
+    @RenderSection("Styles", required: false)
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    @*<div class="navbar nav_title" style="border: 0;">
+                        <a href="/admin/home" class="site_title">
+                            <img src="/admin-side/images/logoniti.png" alt="..." class="img-rounded profile_img" />
+                            <span style="color:white">  NiTiCoApp </span>
+                        </a>
+                    </div>*@
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="/admin/home/index" class="site_title"><i class="fa fa-sheqel"></i> <span>NiTiCo App!</span></a>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!-- menu profile quick info -->
+                    <!-- /menu profile quick info -->
+                    <br />
+                    <!-- sidebar menu -->
+                    @await Component.InvokeAsync("SideBar")
+
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                @await Html.PartialAsync("_LoginPartial")
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+                    @RenderBody()
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-left">
+                    @await Html.PartialAsync("_SelectLanguagePartial")
+                </div>
+                <div class="pull-right">
+                    NiTiCoApp -
+                    @*<a href="http://nitiapp.com"> </a>*@
+                    - Online
+                    <i class="fa fa-user"> <span id="users" class="badge bg-orange"> </span></i>
+
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+
+        </div>
+        <input type="hidden" id="hidUserId" value=@User.GetSpecificClaim("UserId") />
+        <input type="hidden" id="hidUserName" value=@User.GetSpecificClaim("UserName") />
+        <input type="hidden" id="hidUserEmail" value=@User.GetSpecificClaim("Email") />
+        <input type="hidden" id="hidUserFullName" value=@User.GetSpecificClaim("FullName") />
+        <input type="hidden" id="hidUserCorporationId" value=@User.GetSpecificClaim("CorporationId") />
+        <input type="hidden" id="hidUserAvatar" value=@User.GetSpecificClaim("Avatar") />
+        <input type="hidden" id="hidUserRoles" value=@User.GetSpecificClaim("Roles") />
+
+        <input type="hidden" id="hidUserUserOnlineAdmin" />
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="~/vendor/gentelella/vendors/jquery/dist/jquery.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/vendor/gentelella/vendors/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- FastClick -->
+    <script src="~/vendor/gentelella/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="~/vendor/gentelella/vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="~/vendor/gentelella/vendors/Chart.js/dist/Chart.js"></script>
+    <script src="~/vendor/mustache/mustache.js"></script>
+    <!-- jQuery Sparklines -->
+    <script src="~/vendor/twbs-pagination/jquery.twbsPagination.js"></script>
+    <script src="~/vendor/jquery-sparkline/jquery.sparkline.js"></script>
+
+    <script src="~/vendor/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/vendor/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/vendor/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+    <script src="~/vendor/ckeditor/ckeditor.js" asp-append-version="true"></script>
+
+    <!-- gauge.js -->
+    <script src="~/vendor/gentelella/vendors/gauge.js/dist/gauge.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="~/vendor/gentelella/vendors/bootstrap-progressbar/bootstrap-progressbar.js"></script>
+    <!-- iCheck -->
+    <script src="~/vendor/gentelella/vendors/iCheck/icheck.js"></script>
+    <!-- Skycons -->
+    <script src="~/vendor/gentelella/vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    @*<script src="../vendors/Flot/jquery.flot.js"></script>
+        <script src="../vendors/Flot/jquery.flot.pie.js"></script>
+        <script src="../vendors/Flot/jquery.flot.time.js"></script>
+        <script src="../vendors/Flot/jquery.flot.stack.js"></script>
+        <script src="../vendors/Flot/jquery.flot.resize.js"></script>*@
+    <!-- Flot plugins -->
+    @*<script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+        <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+        <script src="../vendors/flot.curvedlines/curvedLines.js"></script>*@
+
+    <!-- DateJS -->
+    <script src="~/vendor/gentelella/vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    @*<script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
+        <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+        <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>*@
+    <!-- bootstrap-daterangepicker -->
+    <script src="~/vendor/gentelella/vendors/moment/min/moment.min.js"></script>
+    <script src="~/vendor/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="~/vendor/notifyjs/dist/notify.js"></script>
+    <script src="~/vendor/notifyjs/dist/styles/metro/notify-metro.js"></script>
+    <script src="~/vendor/bootbox/src/bootbox.js"></script>
+
+    <script src="~/admin-app/shared/localize/resources.@(requestCulture.RequestCulture.Culture.Name).js"></script>
+
+    <!-- Loading.... -->
+    <script src="~/admin-side/loading/loading.js"></script>
+
+    <script src="~/admin-side/js/custom.js" asp-append-version="true"></script>
+
+    <script src="~/vendor/signalr/lib/signalr.js" asp-append-version="true"></script>
+
+    <script src="~/admin-app/shared/niti.js" asp-append-version="true"></script>
+
+    <script src="~/admin-app/shared/countuseronline.js" asp-append-version="true"></script>
+
+    <script>
+
+    </script>
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

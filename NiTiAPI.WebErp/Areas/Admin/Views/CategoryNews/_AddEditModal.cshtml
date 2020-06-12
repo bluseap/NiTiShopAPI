@@ -1,0 +1,96 @@
+﻿@inject IViewLocalizer Localizer
+<div id="modal-add-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">@Localizer["UpdateCatalog"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="horizontal-form">
+                    <input type="hidden" id="hidCatalogId" value="" />
+                    <input type="hidden" id="hidInsertCatalog" value="" />
+
+                    <form class="form-horizontal" role="form" id="frmMaintainance">
+                        <div class="form-group">
+                            <label for="lbCatalogName" class="col-sm-2 control-label no-padding-right">@Localizer["CatalogName"]</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="txtCatalogName" class="form-control" id="txtCatalogName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">@Localizer["CatalogParent"]</label>
+                            <div class="col-sm-10">
+                                <select id="ddlCatalogParent" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label ">@Localizer["CorporationName"]</label>
+                            <div class="col-sm-10">
+                                <select id="ddlAddEditCorporation" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lbCatalogDescription" class="col-sm-2 control-label no-padding-right">@Localizer["CatalogDescription"]</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="txtCatalogDescription" class="form-control" id="txtCatalogDescription">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lbCatalogSortOrder" class="col-sm-2 control-label no-padding-right">@Localizer["CatalogSortOrder"]</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="txtCatalogSortOrder" class="form-control" id="txtCatalogSortOrder">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lbSeoTitle" class="col-sm-2 control-label no-padding-right">@Localizer["SeoTitle"]</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="txtSeoTitle" class="form-control" id="txtSeoTitle">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lbSeoAlias" class="col-sm-2 control-label no-padding-right">@Localizer["SeoAlias"]</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="txtSeoAlias" class="form-control" id="txtSeoAlias">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lbSeoKeyword" class="col-sm-2 control-label no-padding-right">@Localizer["SeoKeyword"]</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="txtSeoKeyword" class="form-control" id="txtSeoKeyword">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lbSeoDescription" class="col-sm-2 control-label no-padding-right">@Localizer["SeoDescription"]</label>
+                            <div class="col-sm-10">
+                                <textarea rows="3" name="txtSeoDescription" class="form-control" id="txtSeoDescription"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <label>
+                                    <input type="checkbox" checked="checked" id="ckShowInMenu">
+                                    <span class="text">@Localizer["ShowInMenu"] </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <label>
+                                    <input type="checkbox"  id="ckShowInHome">
+                                    <span class="text">@Localizer["ShowInHome"] </span>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnEditCatalogCancel" class="btn btn-secondary" data-dismiss="modal">@Localizer["CatalogCance"]</button>
+                <button type="button" id="btnEditCatalogSave" class="btn btn-primary">@Localizer["CatalogSave"]</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+﻿@inject IViewLocalizer Localizer
+<div id="modal-add-AddProductToOrder" class="bootbox modal fade modal-darkorange in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">@Localizer["ListProductToOrder"] </h4>
+            </div>
+            <div class="modal-body">
+                <div id="horizontal-form">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-xs-12 form-group pull-right">
+                            <div class="input-group">
+                                <input type="text" id="txtPTOKeyword" class="form-control">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" id="btnPTOSearch" type="button">@Localizer["Search"]</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12 form-group pull-right">
+                            <div class="input-group">
+                                <select class="form-control" id="ddlPTOCategorySearch"></select>
+                            </div>                            
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12 form-group pull-right">
+                            <div class="input-group">
+                                <select id="ddlPTOCorporation" class="form-control"></select>
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_content">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>@Localizer["Name"]</th>
+                                                <th>@Localizer["Catalog"]</th>
+                                                <th>@Localizer["Corporation"]</th>
+                                                <th>@Localizer["Price"]</th>
+                                                <th>@Localizer["Image"]</th>
+                                                <th>@Localizer["Status"]</th>
+                                                <th width="20%">#</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbl-contentProduct"></tbody>
+                                    </table>
+                                    <!--Pagination-->
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <div class="dataTables_info" id="datatable-checkbox_info" role="status" aria-live="polite">
+                                                <select id="ddl-show-pageProducts">
+                                                    <option value="10" selected="selected">10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="30">30</option>
+                                                    <option value="50">50</option>
+                                                </select>
+                                                <span class="item-per-page">
+                                                    @Localizer["RowPage"]
+                                                </span>
+                                                @Localizer["Toltal"] <strong id="lblTotalRecords"></strong>
+                                            </div>
+                                        </div><div class="col-sm-7">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="datatable-checkbox_paginate">
+                                                <ul id="paginationULProduct"></ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script id="table-templateProduct" type="x-tmpl-mustache">
+                        <tr>
+                            <td>{{Name}}</td>
+                            <td>{{CategoryName}}</td>
+                            <td>{{CorporationName}}</td>
+                            <td>{{Price}}</td>
+                            <td>{{{ImageUrl}}}</td>
+                            <td>{{{Status}}}</td>
+                            <th scope="row">
+                                <a class="btn  btn-sm btn-AddProductToOrder" data-id="{{Id}}" data-toggle="tooltip" data-placement="top" title=@Localizer["UpdateProduct"]><i class="fa fa-pencil"></i></a>
+                                @*<a class="btn  btn-sm btn-delete" data-id="{{Id}}" data-toggle="tooltip" data-placement="top" title=@Localizer["DeleteProduct"]><i class="fa fa-trash"></i></a>
+                    <a href="#" data-id="{{Id}}" class="btn btn-xs btn-images" data-toggle="tooltip" data-placement="top" title=@Localizer["ImageProductManage"]><i class="fa fa-image"></i></a>
+                    <a href="#" data-id="{{Id}}" class="btn btn-xs btn-quantity" data-toggle="tooltip" data-placement="top" title=@Localizer["QuantityProductManage"]><i class="fa fa-hourglass-start"></i></a>
+                    <a href="#" data-id="{{Id}}" class="btn btn-xs btn-whole-price" data-toggle="tooltip" data-placement="top" title=@Localizer["PriceProductManage"]><i class="fa fa-money"></i></a>*@
+                            </th>
+                        </tr>
+                    </script>
+                </div>
+            </div>
+            @*<div class="modal-footer">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" id="btnSaveListOrder" class="btn btn-success">@Localizer["Save"]</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-danger">@Localizer["Cance"]</button>
+                </div>
+            </div>*@
+        </div>
+    </div>
+</div>

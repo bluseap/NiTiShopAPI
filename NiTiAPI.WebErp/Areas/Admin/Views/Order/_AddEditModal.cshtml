@@ -1,0 +1,55 @@
+﻿@inject IViewLocalizer Localizer
+<div id="modal-add-edit" class="bootbox modal fade modal-darkorange in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">@Localizer["AddEditOrder"] </h4>
+            </div>
+            <div class="modal-body">
+                <div id="horizontal-form">                   
+                    <input type="hidden" id="hidInsertOrder" value="" />
+
+                    <form class="form-horizontal" role="form" id="frmMaintainanceAddEdit">
+                        <div class="form-group">                            
+                            <div class="col-sm-6">
+                                <label >@Localizer["CorporationName"] <a style="color:red"> (*)</a> </label>
+                                <select id="ddlAddEditCorporation" class="form-control"></select>
+                            </div>                            
+                            <div class="col-sm-6">
+                                <label for="lbAddEditCustomerName" >@Localizer["CustomerName"] <a style="color:red"> (*)</a></label>
+                                <input type="text" name="txtAddEditCustomerName" class="form-control" id="txtAddEditCustomerName">
+                            </div>
+                        </div>                       
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <label for="lbAddEditCustomerAddress">@Localizer["CustomerAddress"] <a style="color:red"> (*)</a></label>
+                                <input type="text" name="txtAddEditCustomerAddress" class="form-control" id="txtAddEditCustomerAddress">
+                            </div>                            
+                            <div class="col-sm-6">
+                                <label for="lbAddEditCustomerEmail" >@Localizer["CustomerEmail"] <a style="color:red"> (*)</a></label>
+                                <input type="text" name="txtAddEditCustomerEmail" class="form-control" id="txtAddEditCustomerEmail">
+                            </div>
+                        </div>                        
+                        <div class="form-group">               
+                            <div class="col-sm-6">
+                                <label for="lbAddEditCustomerPhone">@Localizer["CustomerPhone"] <a style="color:red"> (*)</a></label>
+                                <input type="text" name="txtAddEditCustomerPhone" class="form-control" id="txtAddEditCustomerPhone">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="lbAddEditCustomerNote" >@Localizer["CustomerNote"] </label>
+                                <input type="text" name="txtAddEditCustomerNote" class="form-control" id="txtAddEditCustomerNote">
+                            </div> 
+                        </div> 
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" id="btnAddEditSave" class="btn btn-success">@Localizer["Save"]</button>
+                                <button type="button" id="btnAddEditCancel" data-dismiss="modal" class="btn btn-danger">@Localizer["Cance"]</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

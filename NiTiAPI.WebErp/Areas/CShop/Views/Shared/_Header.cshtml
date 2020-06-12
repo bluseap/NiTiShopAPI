@@ -1,0 +1,174 @@
+﻿@inject IViewLocalizer Localizer
+
+@{
+    var @corname = @ViewData["CorporationName"];
+    var @faceEmail = @ViewData["faceEmail"];
+    var @faceName = @ViewData["faceName"];
+}
+<header>
+    <div class="header-container">
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-md-4 col-xs-12">
+                        <!-- Language &amp; Currency wrapper -->
+                        <div class="language-currency-wrapper">
+                            <div class="inner-cl">
+                                <div class="block block-language form-language">
+                                    @await Html.PartialAsync("_SelectLanguagePartial")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- top links -->
+                    <div class="headerlinkmenu col-md-8 col-sm-8 col-xs-12">
+                        <span class="phone  hidden-xs hidden-sm">@Localizer["PhoneCall"]: </span>
+                        <span class="phone  hidden-xs hidden-sm" id="spanCorporationPhone">+123.456.789</span>
+                        <ul class="links">
+                            @*<li class="hidden-xs"><a title="Help Center" href="#"><span>Help Center</span></a></li>
+                                <li><a title="Store Locator" href="#"><span>Store Locator</span></a></li>
+                                <li><a title="Checkout" href="checkout.html"><span>Checkout</span></a></li>*@
+                            @*<li>
+                                    <div class="dropdown">
+                                        <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                                            <span>My Account</span>
+                                            <i class="fa fa-angle-down"></i>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="account_page.html">Account</a></li>
+                                            <li><a href="wishlist.html">Wishlist</a></li>
+                                            <li><a href="orders_list.html">Order Tracking</a></li>
+                                            <li><a href="about_us.html">About us</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="/clientshop/account/login/@corname">@Localizer["Login"]</a></li>
+                                            <li><a href="/clientshop/account/register/@corname">@Localizer["Register"]</a></li>
+                                        </ul>
+                                    </div>
+                                </li>*@
+                            @*<li><a title="login" href="account_page.html"><span>Login</span></a></li>*@
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li>
+                                    <div class="dropdown">
+                                        <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                                            <span>@User.Identity.Name</span> <i class="fa fa-angle-down"></i>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="/account.html">@Localizer["Account"]</a></li>
+                                            <li><a href="/wishlist.html">@Localizer["ContinueBuy"]</a></li>
+                                            <li><a href="/orders-list.html">@Localizer["Setting"]</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                                        <a class="current-open" href="#" onclick="document.getElementById('logoutForm').submit()">
+                                            <span>@Localizer["Exit"]</span>
+                                        </a>
+                                    </form>
+                                </li>
+                            }
+                            else
+                            {
+                                <li><a href="/cshop/account/login/@corname">@Localizer["Login"]</a></li>
+                                <li><a href="/cshop/account/register/@corname">@Localizer["Register"]</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- header inner -->
+        <div class="header-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3 col-xs-12 jtv-logo-block">
+
+                        <!-- Header Logo -->
+                        <div class="logo">
+                            <a title="e-commerce" href="/cshop/home/index/@corname">                      
+                                <img alt="ShopMart" title="ShopMart" src="/cshop-side/images/logoNitiApp.jpg">
+                            </a>
+                    </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-5 col-md-6 jtv-top-search">
+
+                        <!-- Search -->
+
+                        <div class="top-search">
+                            <div id="search">
+                                <form>
+                                    <div class="input-group">
+                                        <select id="ddlCategoryId" class="cate-dropdown hidden-xs hidden-sm"></select>
+                                        <input type="text" id="txtSearchHeader" class="form-control" placeholder="Enter your search..." name="search">
+                                        <button class="btnSearchHeader" type="button"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- End Search -->
+
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-3 top-cart">
+                        @*<div class="link-wishlist"> <a href="#"> <i class="icon-heart icons"></i><span> Wishlist</span></a> </div>*@
+                        <!-- top cart -->
+                        <div class="top-cart-contain">                        
+                          <vc:header-cart-c-shop ></vc:header-cart-c-shop>
+
+                            @*<div class="mini-cart">
+            <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle">
+                <a href="#">
+                    <div class="cart-icon">
+                                <i class="icon-basket-loaded icons"></i>
+                                <span class="cart-total">3</span>
+                     </div>
+                    <div class="shoppingcart-inner hidden-xs">
+                                <span class="cart-title">@Localizer["MyCart"]</span> 
+                     </div>
+                </a>
+            </div>
+            <div>
+                <div class="top-cart-content">
+                    <div class="block-subtitle hidden">Recently added items</div>
+                    <ul id="cart-sidebar" class="mini-products-list">
+                        <li class="item odd">
+                            <a href="shopping_cart.html" title="Product title here" class="product-image"><img src="/clientshop-side/images/products/product-1.jpg" alt="html Template" width="65"></a>
+                            <div class="product-details">
+                                <a href="#" title="Remove This Item" class="remove-cart"><i class="pe-7s-trash"></i></a>
+                                <p class="product-name"><a href="shopping_cart.html">Lorem ipsum dolor sit amet Consectetur</a> </p>
+                                <strong>1</strong> x <span class="price">$20.00</span>
+                            </div>
+                        </li>
+                        <li class="item even">
+                            <a href="shopping_cart.html" title="Product title here" class="product-image"><img src="/clientshop-side/images/products/product-1.jpg" alt="html Template" width="65"></a>
+                            <div class="product-details">
+                                <a href="#" title="Remove This Item" class="remove-cart"><i class="pe-7s-trash"></i></a>
+                                <p class="product-name"><a href="shopping_cart.html">Consectetur utes anet adipisicing elit</a> </p>
+                                <strong>1</strong> x <span class="price">$230.00</span>
+                            </div>
+                        </li>
+                        <li class="item last odd">
+                            <a href="shopping_cart.html" title="Product title here" class="product-image"><img src="/clientshop-side/images/products/product-1.jpg" alt="html Template" width="65"></a>
+                            <div class="product-details">
+                                <a href="#" title="Remove This Item" class="remove-cart"><i class="pe-7s-trash"></i></a>
+                                <p class="product-name"><a href="shopping_cart.html">Sed do eiusmod tempor incidist</a> </p>
+                                <strong>2</strong> x <span class="price">$420.00</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="top-subtotal">Subtotal: <span class="price">$520.00</span></div>
+                    <div class="actions">
+                        <button class="btn-checkout" type="button" onClick="location.href='checkout.html'"><i class="fa fa-check"></i><span>Checkout</span></button>
+                        <button class="view-cart" type="button" onClick="location.href='shopping_cart.html'"><i class="fa fa-shopping-cart"></i><span>View Cart</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

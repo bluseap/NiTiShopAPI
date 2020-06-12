@@ -1,0 +1,39 @@
+﻿@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = @Localizer["OrderInfomation"];
+}
+@section Scripts {   
+
+    <script src="~/cshop-app/controllers/cart/order.js" asp-append-version="true"></script>
+    <script>
+        var cartOrder = new orderController();
+        cartOrder.initialize();
+    </script>
+}
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul>
+                    <li class="home"> <a title="Go to Home Page" href="index.html">@Localizer["Home"]</a><span>&raquo;</span></li>
+                    <li><strong>@Localizer["OrderInfo"]</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="main-container col1-layout">
+    <div class="main container">
+        <div class="row">
+            <section class="col-main col-sm-12">
+                <div id="contact" class="page-content page-contact">
+                    <div class="page-title">
+                        <h2>@Localizer["OrderInfo"]</h2>
+                    </div>
+                    <div id="message-box-conact">@Localizer["OrderPlease"].</div>
+                    <div id="message-box-conact">@Localizer["WeWill"].</div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>

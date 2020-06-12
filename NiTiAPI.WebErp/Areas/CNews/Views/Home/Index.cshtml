@@ -1,0 +1,160 @@
+﻿
+@inject IViewLocalizer Localizer
+@model NiTiAPI.Dapper.ViewModels.CNews.HomeCNewsViewModel
+
+@{
+    ViewData["Title"] = Model.Title;
+    ViewData["MetaKeyword"] = Model.MetaKeyword;
+    ViewData["MetaDescription"] = Model.MetaDescription;
+    var @corname = @ViewData["CorporationName"];
+
+}
+
+@section Scripts{
+    <script src="~/cnews-app/controllers/home/index.js" asp-append-version="true"></script>
+    <script>
+        var homeObj = new homeController();
+        homeObj.initialize();
+    </script>
+}
+
+<div class="body-content outer-top-vs" id="top-banner-and-menu">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div id="hero">
+                    <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
+                        <div class="item" style="background-image: url(cnews-side/images/banner/418_vn.png);">
+                            @*<div class="container-fluid">
+                                <div class="caption bg-color vertical-center text-left">
+                                    <div class="slider-header fadeInDown-1">Top Brands 2018</div>
+                                    <div class="big-text fadeInDown-1">Digital <span class="highlight">Watch</span></div>
+                                    <div class="excerpt fadeInDown-2 hidden-xs"> <span>Get 50% off on selected items</span> </div>
+                                    <div class="button-holder fadeInDown-3"> <a href="index6c11.html?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
+                                </div>
+
+                            </div>*@
+                            <!-- /.container-fluid -->
+                        </div>
+                        <!-- /.item -->
+
+                        <div class="item" style="background-image: url(cnews-side/images/banner/416_vn.png);">
+                            <div class="container-fluid">
+                                @*<div class="caption bg-color vertical-center text-left">
+                                    <div class="slider-header fadeInDown-1">Spring 2018</div>
+                                    <div class="big-text fadeInDown-1"> Modern <span class="highlight">Chair</span> </div>
+                                    <div class="excerpt fadeInDown-2 hidden-xs"> <span>Nemo enim ipsam voluptatem quia <br> voluptas sit aspernatur.</span> </div>
+                                    <div class="button-holder fadeInDown-3"> <a href="index6c11.html?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
+                                </div>*@
+
+                            </div>
+                            <!-- /.container-fluid -->
+                        </div>
+                        <!-- /.item -->
+                        <div class="item" style="background-image: url(cnews-side/images/banner/417_vn.png);">
+                        </div>
+                        <div class="item" style="background-image: url(cnews-side/images/banner/422_vn.png);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br /> <br /> 
+               <div class="scroll-tabs outer-top-vs wow fadeInUp animated">
+                   <div class="col-xs-12 col-sm-12 col-md-9">
+                       @foreach (var modelhome in Model.PostHomeCategoryNews)
+                       {
+                           <div id="product-tabs-slider" class="scroll-tabs outer-top-vs wow fadeInUp">
+                               <div class="more-info-tab clearfix ">
+                                   <h3 class="new-product-title pull-left">@modelhome.Name</h3>
+                               </div>
+                               <div class="blog-page">
+                                   @if (modelhome.Id == 1)
+                                   {
+                                       @foreach (var modelhoneintro in Model.PostIntro.Where(p => p.CategoryNewsId == modelhome.Id))
+                                       {
+                                           <div class="blog-post outer-top-bd">
+                                               <a href="blog-details.html">
+                                                   <img class="img-title-post imgViewPostId" src=@modelhoneintro.Image alt="" data-id="@modelhoneintro.Id">
+                                               </a>
+                                               <h1>
+                                                   <a class=" titleViewPostId" data-id="@modelhoneintro.Id">@modelhoneintro.Title</a>
+                                               </h1>
+                                               <span class="date-time">@modelhoneintro.CreatedDate</span>
+                                               <p>@modelhoneintro.Description</p>
+                                               <div class="wow">
+                                                   <a data-id="@modelhoneintro.Id" class="btn btn-upper btn-primary read-more pull-right btnViewPost">Xem thêm</a>
+                                               </div>
+                                               <br />
+                                               <p></p><p></p>
+                                           </div>
+                                       }
+                                   }
+                                   else if (modelhome.Id == 2)
+                                   {
+                                       @foreach (var modelhoneintro in Model.PostEvent.Where(p => p.CategoryNewsId == modelhome.Id))
+                                       {
+                                           <div class="blog-post outer-top-bd">
+                                               <a href="blog-details.html">
+                                                   <img class="img-title-post imgViewPostId" src=@modelhoneintro.Image alt="" data-id="@modelhoneintro.Id">
+                                               </a>
+                                               <h1><a class=" titleViewPostId" data-id="@modelhoneintro.Id">@modelhoneintro.Title</a></h1>
+                                               <span class="date-time">@modelhoneintro.CreatedDate</span>
+                                               <p>@modelhoneintro.Description</p>
+                                               <div class="wow">
+                                                   <a data-id="@modelhoneintro.Id" class="btn btn-upper btn-primary read-more pull-right btnViewPost">Xem thêm</a>
+                                               </div>
+                                               <br />
+                                               <p></p><p></p>
+                                           </div>
+                                       }
+                                   }
+                                   else if (modelhome.Id == 3)
+                                   {
+                                       @foreach (var modelhoneintro in Model.PostProduct.Where(p => p.CategoryNewsId == modelhome.Id))
+                                       {
+                                           <div class="blog-post outer-top-bd">
+                                               <a href="blog-details.html">
+                                                   <img class="img-title-post imgViewPostId" src=@modelhoneintro.Image alt="" data-id="@modelhoneintro.Id">
+                                               </a>
+                                               <h1><a class=" titleViewPostId" data-id="@modelhoneintro.Id">@modelhoneintro.Title</a></h1>
+                                               <span class="date-time">@modelhoneintro.CreatedDate</span>
+                                               <p>@modelhoneintro.Description</p>
+                                               <div class="wow">
+                                                   <a data-id="@modelhoneintro.Id" class="btn btn-upper btn-primary read-more pull-right btnViewPost">Xem thêm</a>
+                                               </div>
+                                               <br />
+                                               <p></p><p></p>
+                                           </div>
+                                       }
+                                   }
+                                   else
+                                   {
+                                       @foreach (var modelhoneintro in Model.PostCustomerInfo.Where(p => p.CategoryNewsId == modelhome.Id))
+                                       {
+                                           <div class="blog-post outer-top-bd">
+                                               <a href="blog-details.html">
+                                                   <img class="img-title-post imgViewPostId" src=@modelhoneintro.Image alt="" data-id="@modelhoneintro.Id">
+                                               </a>
+                                               <h1><a class=" titleViewPostId" data-id="@modelhoneintro.Id">@modelhoneintro.Title</a></h1>
+                                               <span class="date-time">@modelhoneintro.CreatedDate</span>
+                                               <p>@modelhoneintro.Description</p>
+                                               <div class="wow">
+                                                   <a data-id="@modelhoneintro.Id" class="btn btn-upper btn-primary read-more pull-right btnViewPost">Xem thêm</a>
+                                               </div>
+                                               <br />
+                                               <p></p><p></p>
+                                           </div>
+                                       }
+                                   }
+                                   <!-- /.tab-content -->
+                               </div>
+                           </div>
+                       }
+                   </div>
+                   <br /> <br />
+                   @await Component.InvokeAsync("MenuRightCNews")
+               </div>
+
+    </div>
+</div>
