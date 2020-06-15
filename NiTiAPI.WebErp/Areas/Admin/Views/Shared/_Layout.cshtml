@@ -46,19 +46,24 @@
 
     @RenderSection("Styles", required: false)
 </head>
-<body class="nav-md">
+@*<body class="nav-md">*@
+<body class="nav-sm">
     <div class="container body">
         <div class="main_container">
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     @*<div class="navbar nav_title" style="border: 0;">
-                        <a href="/admin/home" class="site_title">
-                            <img src="/admin-side/images/logoniti.png" alt="..." class="img-rounded profile_img" />
-                            <span style="color:white">  NiTiCoApp </span>
-                        </a>
-                    </div>*@
+                            <a href="/admin/home" class="site_title">
+                                <img src="/admin-side/images/logoniti.png" alt="..." class="img-rounded profile_img" />
+                                <span style="color:white">  NiTiCoApp </span>
+                            </a>
+                        </div>*@
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="/admin/home/index" class="site_title"><i class="fa fa-sheqel"></i> <span>NiTiCo App!</span></a>
+                        @*<a href="/admin/home/index" class="site_title"><i class="fa fa-sheqel"></i> <span>NiTiCo App!</span></a>*@
+                        <a href="/admin/home" class="site_title">
+                            <img src="/admin-side/images/powacmo.png" alt="..." class="img-rounded profile_img" />
+                            <span style="color:white">  Ghi thu - CRM</span>
+                        </a>
                     </div>
                     <div class="clearfix"></div>
 
@@ -103,16 +108,19 @@
             <!-- /page content -->
             <!-- footer content -->
             <footer>
-                <div class="pull-left">
-                    @await Html.PartialAsync("_SelectLanguagePartial")
-                </div>
                 <div class="pull-right">
-                    NiTiCoApp -
-                    @*<a href="http://nitiapp.com"> </a>*@
-                    - Online
-                    <i class="fa fa-user"> <span id="users" class="badge bg-orange"> </span></i>
-
+                    Công Ty Cổ Phần Điện Nước An Giang - <a href="http://powaco.vn">CRM</a>
+                    - Đang online <i class="fa fa-user"> <span id="users" class="badge bg-orange"> </span></i>
                 </div>
+                <div class="clearfix"></div>
+                @*<div class="pull-left">
+            @await Html.PartialAsync("_SelectLanguagePartial")
+        </div>
+        <div class="pull-right">
+            NiTiCoApp -
+            - Online
+            <i class="fa fa-user"> <span id="users" class="badge bg-orange"> </span></i>
+        </div>*@
                 <div class="clearfix"></div>
             </footer>
             <!-- /footer content -->
@@ -189,7 +197,8 @@
 
     <script src="~/admin-side/js/custom.js" asp-append-version="true"></script>
 
-    <script src="~/vendor/signalr/lib/signalr.js" asp-append-version="true"></script>
+    @*<script src="~/vendor/signalr/lib/signalr.js" asp-append-version="true"></script>*@
+    <script src="~/js/signalr/dist/browser/signalr.js" asp-append-version="true"></script>
 
     <script src="~/admin-app/shared/niti.js" asp-append-version="true"></script>
 

@@ -50,11 +50,11 @@ var permissionController = function () {
                     }
                     else {
                         $.each(litsPermission, function (j, jitem) {                         
-                            if (jitem.FunctionId === $(item).data('id')) {
-                                $(item).find('.ckView').first().prop('checked', jitem.HasView);
-                                $(item).find('.ckAdd').first().prop('checked', jitem.HasCreated);
-                                $(item).find('.ckEdit').first().prop('checked', jitem.HasUpdate);
-                                $(item).find('.ckDelete').first().prop('checked', jitem.HasDelete);
+                            if (jitem.functionId === $(item).data('id')) {
+                                $(item).find('.ckView').first().prop('checked', jitem.hasView);
+                                $(item).find('.ckAdd').first().prop('checked', jitem.hasCreated);
+                                $(item).find('.ckEdit').first().prop('checked', jitem.hasUpdate);
+                                $(item).find('.ckDelete').first().prop('checked', jitem.hasDelete);
                             }
                         });
                     }
@@ -81,14 +81,14 @@ var permissionController = function () {
                 var render = "";
                 $.each(response, function (i, item) {
                     render += Mustache.render(template, {
-                        Name: item.Name,
-                        treegridparent: item.ParentId !== null ? "treegrid-parent-" + item.ParentId : "",
-                        Id: item.Id,
-                        FunctionId: item.FunctionId,
-                        AllowCreate: item.HasCreated ? "checked" : "",
-                        AllowEdit: item.HasUpdate ? "checked" : "",
-                        AllowView: item.HasView ? "checked" : "",
-                        AllowDelete: item.HasDelete ? "checked" : ""
+                        Name: item.name,
+                        treegridparent: item.parentId !== null ? "treegrid-parent-" + item.parentId : "",
+                        Id: item.id,
+                        FunctionId: item.functionId,
+                        AllowCreate: item.hasCreated ? "checked" : "",
+                        AllowEdit: item.hasUpdate ? "checked" : "",
+                        AllowView: item.hasView ? "checked" : "",
+                        AllowDelete: item.hasDelete ? "checked" : ""
                         //Status: niti.getStatus(item.Status)
                     });
                 });
@@ -195,12 +195,12 @@ var permissionController = function () {
             },
             success: function (response) {
                 niti.appUserLoginLogger(userName, "Create Permissions.");
-                niti.notify(resources["CreateTableOK"], 'success');
+                niti.notify("Lưu thành công.", 'success');
                 $('#modal-grantpermission').modal('hide');
                 niti.stopLoading();
             },
             error: function () {
-                niti.notify(resources["CreateTableError"], 'error');
+                niti.notify("Lưu lỗi!", 'error');
                 niti.stopLoading();
             }
         });

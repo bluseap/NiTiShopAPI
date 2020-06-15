@@ -80,10 +80,10 @@
             url: '/admin/Corporation/GetListCorporations',
             dataType: 'json',
             success: function (response) {
-                var choosen = resources["Choose"]; 
-                var render = "<option value='0' >-- " + choosen + " --</option>";
+                
+                var render = "<option value='0' >-- Tất cả --</option>";
                 $.each(response, function (i, item) {
-                    render += "<option value='" + item.Id + "'>" + item.Name + "</option>";
+                    render += "<option value='" + item.id + "'>" + item.name + "</option>";
                 });
                 $('#ddlCorporation').html(render);
                 $('#ddlAddUpdateCorporation').html(render);
@@ -103,7 +103,7 @@
                 addeditRole.loadTableRole();
             },
             error: function () {                
-                niti.notify(resources['NotFound'], 'error');
+                niti.notify("Không tìm thấy", 'error');
             }
         });
     }
@@ -120,11 +120,11 @@
             success: function (response) {
                 var role = response;
 
-                $('#hidRoleId').val(role.Id);               
+                $('#hidRoleId').val(role.id);               
 
-                $('#ddlAddUpdateCorporation').val(role.CorporationId);
-                $('#txtRoleName').val(role.Name);
-                $('#txtRoleDescription').val(role.Description);
+                $('#ddlAddUpdateCorporation').val(role.corporationId);
+                $('#txtRoleName').val(role.name);
+                $('#txtRoleDescription').val(role.description);
 
                 $('#modal-add-edit').modal('show');
                 niti.stopLoading();
@@ -137,7 +137,7 @@
     }
 
     function deleteRole(roleId) {
-        niti.confirm(resources["DeleteSure"], function () {
+        niti.confirm("Chắc chắn xóa?", function () {
             $.ajax({
                 type: "POST",
                 url: "/Admin/AppRole/DeleteRole",
@@ -150,7 +150,7 @@
                 },
                 success: function (response) {
                     niti.appUserLoginLogger(userName, "Delete Role.");
-                    niti.notify(resources["DeleteTableOK"], 'success');
+                    niti.notify("Xóa thành công.", 'success');
                     niti.stopLoading();
                     addeditRole.loadTableRole();
                 },

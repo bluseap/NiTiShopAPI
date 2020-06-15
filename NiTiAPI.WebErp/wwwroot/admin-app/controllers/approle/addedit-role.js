@@ -34,7 +34,7 @@ var addeditroleController = function () {
                 updateRole(e);
             }
             else {
-                niti.notify(resources["CreateTableError"], "error");
+                niti.notify("Thêm mới lỗi!", "error");
             }
         });
 
@@ -55,7 +55,7 @@ var addeditroleController = function () {
             else
                 return true;
         },
-            resources["PleaseSelect"]
+            "Chọn !"
         );
 
         jQuery.validator.addMethod("isDateVietNam", function (value, element) {
@@ -107,22 +107,22 @@ var addeditroleController = function () {
             success: function (response) {
                 var template = $('#table-templateRoles').html();
                 var render = "";
-                if (response.Items.length > 0) {
-                    $.each(response.Items, function (i, item) {
+                if (response.items.length > 0) {
+                    $.each(response.items, function (i, item) {
                         render += Mustache.render(template, {
-                            Id: item.Id,
-                            Name: item.Name,                            
-                            CorporationName: item.CorporationName
+                            Id: item.id,
+                            Name: item.name,                            
+                            CorporationName: item.corporationName
                         });
                     });
 
-                    $("#lbl-total-recordsRoles").text(response.TotalRow);
+                    $("#lbl-total-recordsRoles").text(response.totalRow);
                     if (render !== undefined) {
                         $('#tbl-contentRoles').html(render);
                     }
 
-                    if (response.TotalRow !== 0) {
-                        wrapPagingRole(response.TotalRow, function () {
+                    if (response.totalRow !== 0) {
+                        wrapPagingRole(response.totalRow, function () {
                             loadTableRole();
                         },
                             isPageChanged);
@@ -194,12 +194,12 @@ var addeditroleController = function () {
                     niti.startLoading();
                 },
                 success: function (response) {
-                    if (response.Success === false) {
-                        niti.notify(resources["CreateTableError"], 'error');
+                    if (response === false) {
+                        niti.notify("Thêm mới lỗi!", 'error');
                     }
                     else {
                         niti.appUserLoginLogger(userName, "Create Role.");
-                        niti.notify(resources["CreateTableOK"], 'success');
+                        niti.notify("Thêm mới thành công.", 'success');
                         $('#modal-add-edit').modal('hide');
                         clearAddEditData();
                         niti.stopLoading();
@@ -207,7 +207,7 @@ var addeditroleController = function () {
                     }
                 },
                 error: function (status) {
-                    niti.notify(resources["CreateTableError"], 'error');
+                    niti.notify("Thêm mới lỗi!", 'error');
                     niti.stopLoading();
                 }
             });
@@ -239,11 +239,11 @@ var addeditroleController = function () {
                 },
                 success: function (response) {
                     if (response.Success === false) {
-                        niti.notify(resources["CreateTableError"], 'error');
+                        niti.notify("Sửa lỗi!", 'error');
                     }
                     else {
                         niti.appUserLoginLogger(userName, "Update Role.");
-                        niti.notify(resources["CreateTableOK"], 'success');
+                        niti.notify("Sửa thành công", 'success');
                         $('#modal-add-edit').modal('hide');
                         clearAddEditData();
                         niti.stopLoading();
@@ -251,7 +251,7 @@ var addeditroleController = function () {
                     }
                 },
                 error: function () {
-                    niti.notify(resources["CreateTableError"], 'error');
+                    niti.notify("Sửa lỗi!", 'error');
                     niti.stopLoading();
                 }
             });

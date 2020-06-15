@@ -17,7 +17,6 @@ using NiTiAPI.WebErp.Data;
 using NiTiAPI.WebErp.Extensions;
 using NiTiAPI.WebErp.Helpers;
 using NiTiAPI.WebErp.Hubs;
-using NiTiAPI.WebErp.Resources;
 using NiTiAPI.WebErp.Services;
 using PaulMiami.AspNetCore.Mvc.Recaptcha;
 using System;
@@ -25,6 +24,7 @@ using System.Collections.Generic;
 using System.Globalization;
 
 using Microsoft.AspNetCore.Hosting;
+//using SignalRChat.Hubs;
 
 namespace NiTiAPI.WebErp
 {
@@ -52,6 +52,8 @@ namespace NiTiAPI.WebErp
                 .AddDefaultTokenProviders();
 
             services.AddRazorPages();
+
+            services.AddSignalR();
 
             services.AddTransient<IUserStore<AppUser>, UserStore>();
             services.AddTransient<IRoleStore<AppRole>, RoleStore>();
@@ -268,6 +270,7 @@ namespace NiTiAPI.WebErp
                 //endpoints.MapHub<NotifyHub>("notifyHub");
 
                 endpoints.MapRazorPages();
+                endpoints.MapHub<UserOnlineHub>("/useronlinehub");
             });
 
             //app.UseSignalR(routes =>

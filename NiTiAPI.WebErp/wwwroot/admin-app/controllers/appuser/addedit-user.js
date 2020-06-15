@@ -223,7 +223,7 @@ var addedituserController = function () {
             async: false,
             success: function (response) {
                 var template = $('#role-template').html();
-                var data = response.Items;
+                var data = response.items;
                 var render = '';
                 $.each(data, function (i, item) {
                     var checked = '';

@@ -144,7 +144,7 @@ html , body{
     padding: 0 0 4px 0
 }
 .left_col {
-    background: #2A3F54
+    background: #2899f3
 }
 .nav-sm .container.body .col-md-3.left_col {
     min-height: 100%;
@@ -223,7 +223,7 @@ html , body{
     top: 0;
     width: 210px;
     z-index: 4000;
-    background: #3E5367;
+    background: #2899f3;
     display: none
 }
 .nav-sm ul.nav.child_menu li {
@@ -304,7 +304,7 @@ html , body{
     margin-top: 5px;
     font-size: 10px;
     min-width: inherit;
-    color: #C4CFDA
+    color: #f5f5f5
 }
 .active a span.fa {
     text-align: right !important;
@@ -356,7 +356,7 @@ body .container.body .right_col {
 .nav_title {
     width: 230px;
     float: left;
-    background: #2A3F54;
+    background: #1b73cc;
     border-radius: 0;
     height: 57px
 }
@@ -488,7 +488,7 @@ body .container.body .right_col {
 }
 body {
     color: #73879C;
-    background: #2A3F54;
+    background: #f5f5f5;
     font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
     font-size: 13px;
     font-weight: 400;
@@ -742,7 +742,7 @@ a:focus {
     padding-left: 36px
 }
 .nav-md ul.nav.child_menu li:before {
-    background: #425668;
+    background: #007cde;
     bottom: auto;
     content: "";
     height: 8px;
@@ -755,16 +755,16 @@ a:focus {
     border-radius: 50%
 }
 .nav-md ul.nav.child_menu li:after {
-    border-left: 1px solid #425668;
+    border-left: 1px solid #2899f3;
     bottom: 0;
     content: "";
     left: 27px;
     position: absolute;
     top: 0
 }
-.nav.side-menu>li>a,
-.nav.child_menu>li>a {
-    color: #E7E7E7;
+.nav.side-menu > li > a,
+.nav.child_menu > li > a {
+    color: #f5f5f5;
     font-weight: 500
 }
 .nav.child_menu li li:hover,
@@ -793,9 +793,9 @@ a:focus {
 .nav li li.current-page a {
     color: #fff
 }
-.nav.side-menu>li.active>a {
-    text-shadow: rgba(0, 0, 0, 0.25) 0 -1px 0;
-    background: linear-gradient(#334556, #2C4257), #2A3F54;
+.nav.side-menu > li.active > a {
+    text-shadow: #f5f5f5 0 0px 0;
+    background: linear-gradient(#2899f3, #0078d8), #123c67;
     box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0
 }
 .navbar-brand,
@@ -872,8 +872,8 @@ a:focus {
 .toggle a i {
     font-size: 26px
 }
-.nav.child_menu>li>a {
-    color: rgba(255, 255, 255, 0.75);
+.nav.child_menu > li > a {
+    color: #f5f5f5;
     font-size: 12px;
     padding: 9px
 }
@@ -1665,8 +1665,8 @@ span.right {
     padding: 5px 0 0 0;
     position: fixed;
     width: 230px;
-    background: #2A3F54;
-	z-index:999;
+    background: #0d69c3;
+    z-index: 999;
 }
 .sidebar-footer a {
     padding: 7px 0 3px;
