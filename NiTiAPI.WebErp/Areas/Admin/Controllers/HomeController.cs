@@ -63,7 +63,7 @@ namespace NiTiAPI.WebErp.Areas.Admin.Controllers
         public async Task<IActionResult> GetTotalUserOnline(int coporationId)
         {
             var model = await _userOnlineRepository.GetListCorporation(coporationId);
-            var result = model.Max(p => p.TotalUser);
+            var result = model.Count();
             return new OkObjectResult(result);
         }
 

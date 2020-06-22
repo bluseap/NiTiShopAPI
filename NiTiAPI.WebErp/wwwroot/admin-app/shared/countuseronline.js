@@ -1,38 +1,23 @@
 ﻿
+
 var corporationId = $("#hidUserCorporationId").val();
+var fullName = $("#hidUserFullName").val();
+var userNameId = $("#hidUserName").val();
+var UserImage = "/admin-side/images/img.jpg";
+var UserImage2 = $("#hidLoginUserImgae2").val();
+var avatarUser = $("#hidAvatarUserId").val();
+var dateNow = new Date();
+//var localdate = dateFormat(dateNow, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+var arr = []; // List of users	
+var fileUploadHinh = [];
+
 
 var countUserOnline = 0;
 
 const connectionUserOnlineAdmin = new signalR.HubConnectionBuilder().withUrl("/useronlinehub").build();
 
-connectionUserOnlineAdmin.start()
-    .then(function () {        
-        //loadCorporationName(corporationId);
-        connectionUserOnlineAdmin.invoke("ClientGetUserOnline");
-    })
-    .catch(function (error) {
-        console.error(error);
-    });
-
+//connectionUserOnlineAdmin.on('ClientGetChatRoom1Members', (data, name, chatRoom, fullname, avatarUser, corporationId1) => {
 connectionUserOnlineAdmin.on('ClientGetChatRoom1Members', (data) => {
-    if (data.length === 0) {
-        $("#totalUserOnline").html('');
-        $("#onlineUsers").html('');
-
-        loadTotalUserOnline(corporationId);
-                
-        $("#hidUserUserOnlineAdmin").val(countUserOnline);
-
-        var codeOnlineUser;
-        codeOnlineUser = '<a>' + 0 + '</>';
-        $("#onlineUsers").append(codeOnlineUser);
-    }
-    else {        
-        loadCorporationName(corporationId, data);        
-    }
-});
-
-connectionUserOnlineAdmin.on('ClientGetUserOnline', (data) => {
     if (data.length === 0) {
         $("#totalUserOnline").html('');
         $("#onlineUsers").html('');
@@ -41,7 +26,7 @@ connectionUserOnlineAdmin.on('ClientGetUserOnline', (data) => {
 
         $("#hidUserUserOnlineAdmin").val(countUserOnline);
 
-        var codeOnlineUser;
+        var codeOnlineUser = '';
         codeOnlineUser = '<a>' + 0 + '</>';
         $("#onlineUsers").append(codeOnlineUser);
     }
@@ -49,6 +34,16 @@ connectionUserOnlineAdmin.on('ClientGetUserOnline', (data) => {
         loadCorporationNameUserDis(corporationId, data);        
     }
 });
+
+connectionUserOnlineAdmin.start()
+    .then(function () {
+        var chatroom = "chatRoom1";        
+        //connectionUserOnlineAdmin.invoke("RegisterMemberParaLogin", userNameId, chatroom, fullName, avatarUser, corporationId);
+        connectionUserOnlineAdmin.invoke("GetChatRoom1Members", userNameId, chatroom, fullName, avatarUser, corporationId);
+    })
+    .catch(function (error) {
+        console.error(error);
+    });
 
 function loadTotalUserOnline(corporationid) {
     var totalUser = 0;
@@ -64,7 +59,7 @@ function loadTotalUserOnline(corporationid) {
             var codeTotalUserOnline;
             totalUser = response;
             codeTotalUserOnline = '<a>' + totalUser + '</>';
-            $("#totalUserOnline").append(codeTotalUserOnline);
+            $("#totalUserOnline").append(codeTotalUserOnline);            
         },
         error: function (status) {
             niti.notify(status, 'error');
@@ -86,21 +81,24 @@ function loadCorporationNameUserDis(corporationid, data) {
             countUserOnline = 0;
             var countUser = 0;
             $.each(data, function (i, item) {
-                var itemName = item.corporationName.toUpperCase();
-                if (itemName === response.Name.toUpperCase()) {
-                    //alert(data.CorporationName);
+                var itemName = item.corporationId.toString().toUpperCase();
+                // trong roomchat1 theo coporationId    userNameId  item.userName
+                if (itemName === response.id.toString().toUpperCase()) {                    
 
                     $("#totalUserOnline").html('');
                     $("#onlineUsers").html('');                          
 
                     countUser = countUser + 1;
-                    //countUserOnline = data.length;
-                    $("#hidUserUserOnlineAdmin").val(countUserOnline);
 
                     var codeOnlineUser;
                     codeOnlineUser = '<a>' + countUser + '</>';
-                    $("#onlineUsers").append(codeOnlineUser);
-                    countUserOnline = countUserOnline + countUser;                    
+                    $("#onlineUsers").append(codeOnlineUser);                   
+
+                    countUserOnline = countUserOnline + countUser;  
+
+                    $("#hidUserUserOnlineAdmin").val(countUserOnline);
+
+                    $("#users").append(countUserOnline);
                 }
             });
             loadTotalUserOnline(corporationid);  
