@@ -98,7 +98,8 @@ function loadCorporationNameUserDis(corporationid, data) {
 
                     $("#hidUserUserOnlineAdmin").val(countUserOnline);
 
-                    $("#users").append(countUserOnline);
+                    $("#users").html('');       
+                    $("#users").append(codeOnlineUser);       
                 }
             });
             loadTotalUserOnline(corporationid);  

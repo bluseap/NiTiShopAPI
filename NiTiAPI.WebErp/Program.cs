@@ -33,6 +33,7 @@ namespace NiTiAPI.WebErp
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                }
+                );
     }    
 }

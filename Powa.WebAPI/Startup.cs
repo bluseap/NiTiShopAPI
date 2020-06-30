@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Server.IIS;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -17,6 +20,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using NiTiAPI.Dapper.Models;
+using NiTiAPI.Dapper.Repositories;
+using NiTiAPI.Dapper.Repositories.Interfaces;
 using NiTiAPI.Dapper.ViewModels;
 using Powa.WebAPI.Data;
 
@@ -38,12 +43,53 @@ namespace Powa.WebAPI
 
 
             services.AddTransient<IUserStore<AppUser>, UserStore>();
-            services.AddTransient<IRoleStore<AppRole>, RoleStore>();
-            
+            services.AddTransient<IRoleStore<AppRole>, RoleStore>();            
 
             services.AddIdentity<AppUser, AppRole>()
                 .AddDefaultTokenProviders();
 
+            services.AddTransient<IAppUserRolesRepository, AppUserRolesRepository>();
+
+            //services.AddTransient<IClaimsTransformation, ClaimsTransformer>();
+            services.AddAuthentication(IISServerDefaults.AuthenticationScheme);
+
+            services.AddMemoryCache();
+            services.AddControllersWithViews();
+
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AutomaticAuthentication = false;
+            });
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromHours(2);
+                options.Cookie.HttpOnly = true;
+            });
+            services.AddAuthentication(options =>
+            {
+                //options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            });
+            services.AddCors(options => options.AddPolicy("CorsPolicy",
+               builder =>
+               {
+                   builder.AllowAnyOrigin()
+                       .AllowAnyHeader()
+                       .WithOrigins("http://localhost:44342", "https://localhost:44342")
+                       .AllowAnyMethod()
+                       .AllowCredentials();
+               }));
+
+
+
+            services.AddResponseCaching(options =>
+            {
+                options.MaximumBodySize = 1024;
+                options.UseCaseSensitivePaths = true;
+            });
+            services.AddRazorPages();
 
 
             services.AddControllers()
@@ -93,7 +139,7 @@ namespace Powa.WebAPI
 
             string issuer = Configuration.GetValue<string>("Tokens:Issuer");
             string signingKey = Configuration.GetValue<string>("Tokens:Key");
-            byte[] signingKeyBytes = System.Text.Encoding.UTF8.GetBytes(signingKey);
+            //byte[] signingKeyBytes = System.Text.Encoding.UTF8.GetBytes(signingKey);
 
             services.AddAuthentication(opt =>
             {
@@ -113,7 +159,7 @@ namespace Powa.WebAPI
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     ClockSkew = System.TimeSpan.Zero,
-                    IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
+                    //IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
                 };
             });
         }
@@ -160,17 +206,34 @@ namespace Powa.WebAPI
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseAuthentication();
             app.UseRouting();
 
+            app.UseCors("CorsPolicy");
+            app.UseResponseCaching();
+            app.Use(async (context, next) =>
+            {
+                context.Response.GetTypedHeaders().CacheControl =
+                    new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+                    {
+                        Public = true,
+                        MaxAge = TimeSpan.FromSeconds(10)
+                    };
+                context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
+                    new string[] { "Accept-Encoding" };
+
+                await next();
+            });            
+            app.UseSession();
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseSwagger();
-
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Powaco App V1");
             });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
