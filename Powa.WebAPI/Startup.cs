@@ -24,6 +24,7 @@ using NiTiAPI.Dapper.Repositories;
 using NiTiAPI.Dapper.Repositories.Interfaces;
 using NiTiAPI.Dapper.ViewModels;
 using Powa.WebAPI.Data;
+using Serilog;
 
 namespace Powa.WebAPI
 {
@@ -82,15 +83,12 @@ namespace Powa.WebAPI
                        .AllowCredentials();
                }));
 
-
-
             services.AddResponseCaching(options =>
             {
                 options.MaximumBodySize = 1024;
                 options.UseCaseSensitivePaths = true;
             });
             services.AddRazorPages();
-
 
             services.AddControllers()
             .ConfigureApiBehaviorOptions(options =>
@@ -166,8 +164,7 @@ namespace Powa.WebAPI
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            //loggerFactory.AddFile(Configuration.GetSection("Logging"));
+        {          
             app.UseExceptionHandler(options =>
             {
                 options.Run(async context =>
@@ -205,6 +202,8 @@ namespace Powa.WebAPI
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSerilogRequestLogging();
 
             app.UseRouting();
 

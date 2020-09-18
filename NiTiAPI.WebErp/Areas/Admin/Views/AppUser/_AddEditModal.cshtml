@@ -10,78 +10,79 @@
                 <div id="horizontal-form">
                     <form class="form-horizontal" role="form" id="frmMaintainance">   
                         <div class="form-group">
-                            <label for="lbHinhThe" class="col-sm-3 control-label" >Hình</label>
-                            <div class="col-xs-9 form-group has-feedback">
-                                <div id="imagelistUserImage" class="col-xs-9" >
-                                </div>
-                                <div class="col-xs-9" ><input type="file" id="fileInputUserImage" /></div>
+                            <div class="col-sm-6 pull-left">
+                                <label for="lbHinhThe">Hình</label>
+                                <div id="imagelistUserImage"> </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="file" id="fileInputUserImage" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="lbFullName" class="col-sm-3 control-label">Tên đầy đủ <a style="color:red"> (*)</a></label>
-                            <div class="col-sm-9">
+                            <div class="col-sm-12">
+                                <label for="lbFullName" >Tên đầy đủ <a style="color:red"> (*)</a></label>
                                 <input type="text" name="txtFullName" class="form-control" id="txtFullName">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="lbUserName" class="col-sm-3 control-label">Tên đăng nhập <a style="color:red"> (*)</a></label>
-                            <div class="col-sm-9">
+                            <div class="col-sm-12">
+                                <label for="lbUserName" >Tên đăng nhập <a style="color:red"> (*)</a></label>
                                 <input type="text" name="txtUserName" class="form-control" id="txtUserName" />
                             </div>
                         </div>
-
                         <div class="form-group">
-                            <label for="lbPassword" class="col-sm-3 control-label">Mật mã <a style="color:red"> (*)</a></label>
-                            <div class="col-sm-9">
+                            <div class="col-sm-12">
+                                <label for="lbPassword" >Mật mã <a style="color:red"> (*)</a></label>
                                 <input type="password" name="txtPassword" class="form-control" id="txtPassword" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="lbConfirmPassword" class="col-sm-3 control-label">Nhập lại mật mã <a style="color:red"> (*)</a></label>
-                            <div class="col-sm-9">
+                            <div class="col-sm-12">
+                                <label for="lbConfirmPassword" >Nhập lại mật mã <a style="color:red"> (*)</a></label>
                                 <input type="password" name="txtConfirmPassword" class="form-control" id="txtConfirmPassword">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="lbEmail" class="col-sm-3 control-label ">Email </label>
-                            <div class="col-sm-9">
+                            <div class="col-sm-12">
+                                <label for="lbEmail" >Email </label>
                                 <input type="email" name="txtEmail" class="form-control" id="txtEmail">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="lbPhoneNumber" class="col-sm-3 control-label">Số điện thoại </label>
-                            <div class="col-sm-9">
+                            <div class="col-sm-12">
+                                <label for="lbPhoneNumber" >Số điện thoại </label>
                                 <input type="text" name="txtPhoneNumber" class="form-control" id="txtPhoneNumber">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label ">Khu vực <a style="color:red"> (*)</a></label>
-                            <div class="col-sm-9">
+                            <div class="col-sm-12">
+                                <label >Khu vực <a style="color:red"> (*)</a></label>
                                 <select id="ddlAddUpdateCorporation" class="form-control"></select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Phân quyền <a style="color:red"> (*)</a></label>
-                            <div class="col-sm-9" id="list-roles">
+                            <div class="col-sm-12 pull-left">
+                                <label>Phân quyền <a style="color:red"> (*)</a></label>
+                                <div id="list-roles">   </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" checked="checked" id="ckStatus">
-                                        <span class="text">Kích hoạt</span>
-                                    </label>
+                         </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" checked="checked" id="ckStatus">
+                                            <span class="text">Kích hoạt</span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="button" id="btnSaveUser" class="btn btn-success">Lưu</button>
-                                <button type="button" id="btnCancelUser" data-dismiss="modal" class="btn btn-default">Đóng</button>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="button" id="btnSaveUser" class="btn btn-success">Lưu</button>
+                                    <button type="button" id="btnCancelUser" data-dismiss="modal" class="btn btn-default">Đóng</button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+</form>
                 </div>
 
             </div>

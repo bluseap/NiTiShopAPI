@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 using NiTiAPI.Dapper.Models;
@@ -30,15 +31,18 @@ namespace Powa.WebAPI.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
         private readonly string _connectionString;
+        private readonly ILogger<AppUserController> _logger;
 
         public AppUserController(UserManager<AppUser> userManager,
             IConfiguration configuration,
-            SignInManager<AppUser> signInManager)
+            SignInManager<AppUser> signInManager,
+            ILogger<AppUserController> logger)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _configuration = configuration;
             _connectionString = configuration.GetConnectionString("DbConnectionString");
+            _logger = logger;
         }
 
         [HttpPost]
@@ -47,6 +51,8 @@ namespace Powa.WebAPI.Controllers
         [ValidateModel]
         public async Task<IActionResult> Login([FromBody] LoginAPIViewModel model)
         {
+            _logger.LogInformation("Begin Login API");
+
             var user = await _userManager.FindByNameAsync(model.UserName);
             if (user != null)
             {

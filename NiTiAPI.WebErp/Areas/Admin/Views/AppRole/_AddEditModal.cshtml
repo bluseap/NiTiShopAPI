@@ -11,31 +11,32 @@
                     <input type="hidden" id="hidRoleId" value="" />
                     <input type="hidden" id="hidInsertRole" value="" />
 
+                    @*<form data-parsley-validate class="form-horizontal form-label-left" role="form" id="frmMaintainance">*@
                     <form class="form-horizontal" role="form" id="frmMaintainance">
                         <div class="form-group">
-                            <label for="lbAddUpdateCorporation" class="col-sm-3 control-label no-padding-right">Khu vực <a style="color:red"> (*)</a></label>
-                            <div class="col-sm-9">
+                            <div class="col-sm-12">
+                                <label for="lbAddUpdateCorporation" >Khu vực <a style="color:red"> (*)</a></label>
                                 <select id="ddlAddUpdateCorporation" class="form-control"></select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="lbRoleName" class="col-sm-3 control-label no-padding-right">Tên phân quyền <a style="color:red"> (*)</a></label>
-                            <div class="col-sm-9">
-                                <textarea rows="4" name="txtRoleName" class="form-control" id="txtRoleName"  ></textarea>
+                            <div class="col-sm-12">
+                                <label for="lbRoleName" >Tên phân quyền <a style="color:red"> (*)</a></label>
+                                <textarea rows="4" name="txtRoleName" class="form-control" id="txtRoleName"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="lbRoleDescription" class="col-sm-3 control-label no-padding-right">Mô tả <a style="color:red"> (*)</a></label>
-                            <div class="col-sm-9">
-                                <textarea rows="4" name="txtRoleDescription" class="form-control" id="txtRoleDescription" ></textarea>
-                            </div>
+                            <div class="col-sm-12">
+                                <label for="lbRoleDescription" >Mô tả <a style="color:red"> (*)</a></label>
+                                <textarea rows="4" name="txtRoleDescription" class="form-control" id="txtRoleDescription"></textarea>
+                            </div>                            
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="button" id="btnSave" class="btn btn-success">Lưu</button>
-                                <button type="button" id="btnCancel" data-dismiss="modal" class="btn btn-danger">Đóng</button>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="button" id="btnSave" class="btn btn-success">Lưu</button>
+                                    <button type="button" id="btnCancel" data-dismiss="modal" class="btn btn-danger">Đóng</button>
+                                </div>
                             </div>
-                        </div>
                     </form>
                 </div>
             </div>

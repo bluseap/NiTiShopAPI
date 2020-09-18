@@ -39,7 +39,6 @@ namespace Powa.WebAPI.Controllers
             _appuserrolesRepository = appuserrolesRepository;
         }
 
-
         [HttpGet("GetByCor", Name = "GetByCorporationId")]
         public async Task<List<AppUserRolesViewModel>> GetByCorporationId(int coporationid)
         {

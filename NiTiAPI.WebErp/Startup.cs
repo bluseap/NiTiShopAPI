@@ -90,10 +90,7 @@ namespace NiTiAPI.WebErp
                 options.IdleTimeout = TimeSpan.FromHours(2);
                 options.Cookie.HttpOnly = true;
             });
-            //services.AddSession(options =>
-            //{
-            //    options.IdleTimeout = TimeSpan.FromMinutes(30);
-            //});
+           
 
             services.AddImageResizer();
             services.AddAutoMapper();
@@ -117,59 +114,11 @@ namespace NiTiAPI.WebErp
 
             //  services.AddTransient<DbInitializer>();
             services.AddScoped<IUserClaimsPrincipalFactory<AppUser>, CustomClaimsPrincipalFactory>();
-
-            //Add authen fixbug cannot get Claims
-            //services.AddAuthentication(o =>
-            //{
-            //    o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //}).AddJwtBearer(cfg =>
-            //{
-            //    cfg.RequireHttpsMetadata = false;
-            //    cfg.SaveToken = true;
-
-            //    cfg.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidIssuer = Configuration["Tokens:Issuer"],
-            //        ValidAudience = Configuration["Tokens:Issuer"],
-            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]))
-            //    };
-            //});
+           
 
             services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
 
-            //services.AddMvc(options =>
-            //{
-            //    options.CacheProfiles.Add("Default",
-            //        new CacheProfile()
-            //        {
-            //            Duration = 60
-            //        });
-            //    options.CacheProfiles.Add("Never",
-            //        new CacheProfile()
-            //        {
-            //            Location = ResponseCacheLocation.None,
-            //            NoStore = true
-            //        });
-            //})
-            //.SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-
-            //.AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix,
-            //        opts => { opts.ResourcesPath = "Resources"; })
-            ////.AddDataAnnotationsLocalization()
-            //.AddDataAnnotationsLocalization(otp =>
-            //{
-            //    otp.DataAnnotationLocalizerProvider = (type, factory) =>
-            //    {
-            //        var assemblyName = new AssemblyName(typeof(SharedResource).GetTypeInfo().Assembly.FullName);
-            //        return factory.Create("SharedResource", assemblyName.Name);
-            //    };
-            //})
-
-            // .AddRazorPagesOptions(options => options.AllowAreas = true)
-
-            //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
-            //;
+           
             services.AddCors(options => options.AddPolicy("CorsPolicy",
                builder =>
                {
