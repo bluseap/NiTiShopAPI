@@ -20,6 +20,7 @@ using NiTiAPI.Dapper.ViewModels;
 using NiTiAPI.Utilities.Constants;
 
 using Powa.WebAPI.Filters;
+using Powa.WebAPI.Helpers;
 
 namespace Powa.WebAPI.Controllers
 {
@@ -44,8 +45,6 @@ namespace Powa.WebAPI.Controllers
         {
             return await _appuserrolesRepository.GetListpUserRoles(coporationid);
         }
-
-
 
 
     }

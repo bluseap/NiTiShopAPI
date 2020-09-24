@@ -13,12 +13,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-
+using Newtonsoft.Json;
 using NiTiAPI.Dapper.Models;
+using NiTiAPI.Dapper.Repositories.Interfaces;
 using NiTiAPI.Dapper.ViewModels;
 using NiTiAPI.Utilities.Constants;
 
 using Powa.WebAPI.Filters;
+using Powa.WebAPI.Helpers;
 
 namespace Powa.WebAPI.Controllers
 {
@@ -33,22 +35,25 @@ namespace Powa.WebAPI.Controllers
         private readonly string _connectionString;
         private readonly ILogger<AppUserController> _logger;
 
+        private readonly IAppUserLoginRepository _appuserloginrepository;
+
         public AppUserController(UserManager<AppUser> userManager,
             IConfiguration configuration,
             SignInManager<AppUser> signInManager,
-            ILogger<AppUserController> logger)
+            ILogger<AppUserController> logger, IAppUserLoginRepository appuserloginrepository)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _configuration = configuration;
             _connectionString = configuration.GetConnectionString("DbConnectionString");
             _logger = logger;
+            _appuserloginrepository = appuserloginrepository;
         }
 
         [HttpPost]
         [AllowAnonymous]
         [Route("login")]
-        [ValidateModel]
+        [ValidateModel]        
         public async Task<IActionResult> Login([FromBody] LoginAPIViewModel model)
         {
             _logger.LogInformation("Begin Login API");
@@ -68,8 +73,10 @@ namespace Powa.WebAPI.Controllers
                     new Claim(SystemConstants.UserClaim.Id, user.Id.ToString()),
                     new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(SystemConstants.UserClaim.FullName, user.FullName??string.Empty),
-                    //new Claim(SystemConstants.UserClaim.Roles, string.Join(";", roles)),
-                    //new Claim(SystemConstants.UserClaim.Permissions, JsonConvert.SerializeObject(permissions)),
+
+                    new Claim(SystemConstants.UserClaim.Roles, string.Join(";", roles)),
+                    new Claim(SystemConstants.UserClaim.Permissions, JsonConvert.SerializeObject(permissions)),
+
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]));
@@ -80,6 +87,9 @@ namespace Powa.WebAPI.Controllers
                         claims,
                     expires: DateTime.Now.AddDays(2),
                     signingCredentials: creds);
+
+                //Luoc su Login thiet bi
+                CountUserLogin(user.Email);
 
                 return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
             }
@@ -99,6 +109,36 @@ namespace Powa.WebAPI.Controllers
                 var result = await conn.QueryAsync<string>("Get_Permission_ByUserId", paramaters, null, null, System.Data.CommandType.StoredProcedure);
                 return result.ToList();
             }
+        }
+
+        public void CountUserLogin(string userNameId)
+        {
+            //string ipString = HttpContext.Connection.RemoteIpAddress.ToString(); // LoginIpAddress
+            //IPHostEntry heserver = Dns.GetHostEntry(Dns.GetHostName());          
+            //var nameComputer = heserver.HostName.ToString(); // LoginNameIp
+            //var localIp6 = heserver.AddressList[0] != null ? heserver.AddressList[0].ToString() : "";
+            //var temIp6 = heserver.AddressList[1] != null ? heserver.AddressList[1].ToString() : "";
+            //var ip6Address = "";
+            //var ipComputer = ipString;//heserver.AddressList[3].ToString(); // LoginIp
+
+            var appuserloginVm = new AppUserLoginViewModel();
+            
+            var username = userNameId;
+
+            appuserloginVm.UserName = username;
+
+            appuserloginVm.LoginIpAddress = userNameId;
+            appuserloginVm.LoginIp = userNameId;
+            appuserloginVm.LoginNameIp = userNameId;
+            appuserloginVm.LoginIp6Address = userNameId;
+            appuserloginVm.LoginLocalIp6Adress = userNameId;
+            appuserloginVm.LoginMacIp = userNameId;
+
+            appuserloginVm.CreateDate = DateTime.Now;
+            appuserloginVm.CreateBy = username;
+
+            var model = _appuserloginrepository.AppUserLoginAUD(appuserloginVm, "InAppUserLogin");
+
         }
 
     }
