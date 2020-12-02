@@ -23,10 +23,10 @@ using NiTiAPI.Dapper.Models;
 using NiTiAPI.Dapper.Repositories;
 using NiTiAPI.Dapper.Repositories.Interfaces;
 using NiTiAPI.Dapper.ViewModels;
-using Powa.WebAPI.Data;
+using LuckySo.WebAPI.Data;
 using Serilog;
 
-namespace Powa.WebAPI
+namespace LuckySo.WebAPI
 {
     public class Startup
     {

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 
 
-namespace Powa.WebAPI.Filters
+namespace LuckySo.WebAPI.Filters
 {
     public class ValidateModelAttribute : ActionFilterAttribute
     {

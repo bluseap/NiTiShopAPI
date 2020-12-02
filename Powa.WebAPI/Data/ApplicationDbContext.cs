@@ -1,5 +1,5 @@
-﻿using Powa.WebAPI.Data.Entities;
-using Powa.WebAPI.Data.Interfaces;
+﻿using LuckySo.WebAPI.Data.Entities;
+using LuckySo.WebAPI.Data.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Powa.WebAPI.Data
+namespace LuckySo.WebAPI.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User>
     {

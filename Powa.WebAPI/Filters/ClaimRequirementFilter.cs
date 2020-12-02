@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 
-namespace Powa.WebAPI.Filters
+namespace LuckySo.WebAPI.Filters
 {
     public class ClaimRequirementFilter : IAuthorizationFilter
     {

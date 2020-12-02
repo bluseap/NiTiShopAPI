@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Powa.WebAPI.Data.Entities
+namespace LuckySo.WebAPI.Data.Entities
 {
     [Table("Labels")]
     public class Label

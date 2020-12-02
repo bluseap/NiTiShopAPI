@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Powa.WebAPI.Extensions
+namespace LuckySo.WebAPI.Extensions
 {
     public static class IdentityExtension
     {

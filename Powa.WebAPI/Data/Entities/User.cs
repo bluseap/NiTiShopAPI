@@ -1,10 +1,10 @@
-﻿using Powa.WebAPI.Data.Interfaces;
+﻿using LuckySo.WebAPI.Data.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Powa.WebAPI.Data.Entities
+namespace LuckySo.WebAPI.Data.Entities
 {
     public class User : IdentityUser, IDateTracking
     {

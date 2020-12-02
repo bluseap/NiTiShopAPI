@@ -1,6 +1,6 @@
 ﻿
 
-namespace Powa.WebAPI.Filters
+namespace LuckySo.WebAPI.Filters
 {
     public enum FunctionCode
     {

@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Powa.WebAPI.Data
+namespace LuckySo.WebAPI.Data
 {
     public class RoleStore : IRoleStore<AppRole>
     {

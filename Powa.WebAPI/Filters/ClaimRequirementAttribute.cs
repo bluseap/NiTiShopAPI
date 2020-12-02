@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Powa.WebAPI.Filters
+namespace LuckySo.WebAPI.Filters
 {
     public class ClaimRequirementAttribute : TypeFilterAttribute
     {

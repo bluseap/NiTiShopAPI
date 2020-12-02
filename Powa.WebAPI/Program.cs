@@ -9,10 +9,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Powa.WebAPI.Data;
+using LuckySo.WebAPI.Data;
 using Serilog;
 
-namespace Powa.WebAPI
+namespace LuckySo.WebAPI
 {
     public class Program
     {

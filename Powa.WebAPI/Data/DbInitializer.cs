@@ -1,11 +1,11 @@
-﻿using Powa.WebAPI.Data.Entities;
+﻿using LuckySo.WebAPI.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Powa.WebAPI.Data
+namespace LuckySo.WebAPI.Data
 {
     public class DbInitializer
     {

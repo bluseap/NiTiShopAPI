@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NiTiAPI.WebErp", "NiTiAPI.W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NiTiAPI.Infrastructure", "NiTiAPI.Infrastructure\NiTiAPI.Infrastructure.csproj", "{4D61E42F-DAF3-4E99-BDAD-4726A82597BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Powa.WebAPI", "Powa.WebAPI\Powa.WebAPI.csproj", "{78C35F7F-57E3-465D-B3F3-9EB2530FCFC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuckySo.WebAPI", "Powa.WebAPI\LuckySo.WebAPI.csproj", "{78C35F7F-57E3-465D-B3F3-9EB2530FCFC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

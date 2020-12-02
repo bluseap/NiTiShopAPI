@@ -19,10 +19,10 @@ using NiTiAPI.Dapper.Repositories.Interfaces;
 using NiTiAPI.Dapper.ViewModels;
 using NiTiAPI.Utilities.Constants;
 
-using Powa.WebAPI.Filters;
-using Powa.WebAPI.Helpers;
+using LuckySo.WebAPI.Filters;
+using LuckySo.WebAPI.Helpers;
 
-namespace Powa.WebAPI.Controllers
+namespace LuckySo.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

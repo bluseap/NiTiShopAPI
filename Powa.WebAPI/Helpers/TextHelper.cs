@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Powa.WebAPI.Helpers
+namespace LuckySo.WebAPI.Helpers
 {
     public class TextHelper
     {
